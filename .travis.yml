@@ -1,6 +1,8 @@
 language: generic
 before_install:
 - openssl aes-256-cbc -K $encrypted_c583b9a48211_key -iv $encrypted_c583b9a48211_iv
+  -in backend_config.enc -out terraform/secrets/backend_config -d
+- openssl aes-256-cbc -K $encrypted_c583b9a48211_key -iv $encrypted_c583b9a48211_iv
   -in account.json.enc -out terraform/secrets/account.json -d
 - curl https://releases.hashicorp.com/terraform/0.11.10/terraform_0.11.10_linux_amd64.zip
   -o /opt/terraform.zip
