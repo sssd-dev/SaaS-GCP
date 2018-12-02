@@ -1,0 +1,15 @@
+language: generic
+before_install:
+- openssl aes-256-cbc -K $encrypted_c583b9a48211_key -iv $encrypted_c583b9a48211_iv
+  -in account.json.enc -out terraform/secrets/account.json -d
+- curl https://releases.hashicorp.com/terraform/0.11.10/terraform_0.11.10_linux_amd64.zip
+  -o /opt/terraform.zip
+- unzip /opt/terraform.zip -d /opt/
+deploy:
+  provider: script
+  script: bash scripts/build.sh
+  on:
+    branch: develop
+env:
+  global:
+    secure: kbwViBJUUh9J/O9uav4AHVQBbry8WznMpWu68vnXu9l3fefr0kxcOq3zKqxAzhjWs/bV3436aMQPGvr1bPpkM49ql4Klh05iSUo7aMwewsJbWxqAC8Hsw9n89tyRgcZTXBEwTpyFy9N3QKi5TjdPAbj0em8I0gR+nWZUJiZ3IQXATn+48jqH+Q9LyLPpqc5XESDFQU5FVuc4l6dyOyTSavCkdRdCuNZ1NNV5+4EgyRhZkVTXLxBKikSHOl8BnJLsZJEzr3I5Sg5Oy9kglK46PoDx6qKMlncdIarwmh/1wxsFfSkzKB9D4XtklobuKakFI8J29vhuunQbzzg6O5kVKzjVT9BVEF6MpGWV3yhgp3DjyleDebbhhDiU58khdqW7M2UgBSgB+46WyUE/DJmpbYg5yn4ol+drAJnEYERap+X4DSo3IqxRpGZwWepESVwQIK+ZV1atV0VtaTzfv4bdM0MReTKAgMy4oylTVZq2U4OjdSjHLxIr3PX8OU32NMAcnG/wQ2a5DDY8DmG7S/ZXCsYBiJfGjhcaRuVf/VhuFErYFJzDxya8QOJaZcu0X4A+qTKFsBN0Hkhh/IjBDu9b/gMIr70MfLQGPEoV09Wso+h3toOjvuxE4P79slwLHwFhOS1xk7OrbY2NUsUiy5IHEutL6XR7kHUiPfHRKvg4trQ=
